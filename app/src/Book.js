@@ -45,7 +45,7 @@ class Book extends Component {
         createItem.author = this.state.authorName;
         createItem.name= this.state.bookName;
         createItem.count =  Number(this.state.count); 
-        const url = 'http://localhost:8080/api/add';
+        const url = 'http://dockerspringboot-dev.us-west-1.elasticbeanstalk.com/api/add';
         const proxyurl = 'https://cors-anywhere.herokuapp.com/';
         console.log(createItem);
     try {
