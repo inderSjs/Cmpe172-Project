@@ -45,7 +45,7 @@ class Home extends Component {
 
     async componentDidMount(){
         try{
-        const response=await fetch('http://localhost:8080/api/books');
+        const response=await fetch('http://dockerspringboot-dev.us-west-1.elasticbeanstalk.com/api/books');
         console.log(response);
         const body = await response.json();
         this.setState({Books : body, isLoading: false});
