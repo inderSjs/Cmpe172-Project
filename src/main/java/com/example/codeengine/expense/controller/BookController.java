@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,7 @@ import com.example.codeengine.expense.model.Book;
 import com.example.codeengine.expense.repository.BookRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class BookController {
@@ -29,6 +32,7 @@ public class BookController {
 		this.bookRepository = bookRepository;
 	}
 	
+	@CrossOrigin(origins = "*")
 	@RequestMapping(method=RequestMethod.GET, value="/books")
 	public List<Book> getAllBooks() {
 		return (List<Book>) bookRepository.findAll();
@@ -44,12 +48,12 @@ public class BookController {
 		return bookRepository.findById(id).orElse(null);
 	} 
 	
-	
-	@RequestMapping(method=RequestMethod.POST, value="/add")
-	public String addBook(@RequestBody Book book) {
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method=RequestMethod.POST, value="/add",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Book addBook(@RequestBody Book book) {
 		bookRepository.save(book);
 		String temp = book.getAuthor();
-		return temp;
+		return book;
 	}
 	
 	
